@@ -11,6 +11,7 @@ import Reader from "./pages/Reader";
 import AIAssistant from "./pages/AIAssistant";
 import Quiz from "./pages/Quiz";
 import Settings from "./pages/Settings";
+import Auth from "./pages/Auth";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/library" element={<Layout><Library /></Layout>} />
           <Route path="/reader" element={<Layout><Reader /></Layout>} />
           <Route path="/ai-assistant" element={<Layout><AIAssistant /></Layout>} />

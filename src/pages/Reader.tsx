@@ -15,7 +15,9 @@ import {
   Type,
   Minus,
   Plus,
+  ClipboardList,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
@@ -28,6 +30,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 const Reader = () => {
+  const navigate = useNavigate();
   const [isPlaying, setIsPlaying] = useState(false);
   const [fontSize, setFontSize] = useState(18);
   const [readingProgress, setReadingProgress] = useState(35);
@@ -55,10 +58,30 @@ He didn't say any more, but we've always been unusually communicative in a reser
           <h1 className="text-2xl font-bold">{bookContent.title}</h1>
           <p className="text-muted-foreground">{bookContent.author}</p>
         </div>
-        <Button variant="outline" className="btn-accessible">
-          <Bookmark className="mr-2 h-5 w-5" />
-          Bookmark
-        </Button>
+        <div className="flex gap-2">
+          <Button 
+            variant="outline" 
+            size="icon"
+            onClick={() => navigate("/ai-assistant")}
+            aria-label="AI Assistant"
+            title="Ask AI Assistant"
+          >
+            <MessageSquare className="h-5 w-5" />
+          </Button>
+          <Button 
+            variant="outline" 
+            size="icon"
+            onClick={() => navigate("/quiz")}
+            aria-label="Take Quiz"
+            title="Take Quiz"
+          >
+            <ClipboardList className="h-5 w-5" />
+          </Button>
+          <Button variant="outline" className="btn-accessible">
+            <Bookmark className="mr-2 h-5 w-5" />
+            Bookmark
+          </Button>
+        </div>
       </div>
 
       {/* Reading Controls */}

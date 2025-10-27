@@ -171,24 +171,28 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <div className="grid gap-4 md:grid-cols-2">
-        <Card className="card-hover cursor-pointer" onClick={() => window.location.href = '/library'}>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5" />
-              Browse Library
-            </CardTitle>
-            <CardDescription>Explore your collection of books</CardDescription>
-          </CardHeader>
-        </Card>
-        <Card className="card-hover cursor-pointer" onClick={() => window.location.href = '/ai-assistant'}>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Brain className="h-5 w-5" />
-              Ask AI Assistant
-            </CardTitle>
-            <CardDescription>Get help with your reading</CardDescription>
-          </CardHeader>
-        </Card>
+        <Link to="/library">
+          <Card className="card-hover cursor-pointer">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BookOpen className="h-5 w-5" />
+                Browse Library
+              </CardTitle>
+              <CardDescription>Explore your collection of books</CardDescription>
+            </CardHeader>
+          </Card>
+        </Link>
+        <Link to="/ai-assistant">
+          <Card className="card-hover cursor-pointer">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Brain className="h-5 w-5" />
+                Ask AI Assistant
+              </CardTitle>
+              <CardDescription>Get help with your reading</CardDescription>
+            </CardHeader>
+          </Card>
+        </Link>
       </div>
     </div>
   );

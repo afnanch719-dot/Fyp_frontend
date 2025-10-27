@@ -1,4 +1,4 @@
-import { Mic, Moon, Sun, Menu } from "lucide-react";
+import { Mic, Moon, Sun, Menu, Home, Library, BookOpen, MessageSquare, ClipboardList, Settings as SettingsIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -27,49 +27,24 @@ const Layout = ({ children }: LayoutProps) => {
   }, [isDark]);
 
   const navItems = [
-    { href: "/", label: "Dashboard" },
-    { href: "/library", label: "Library" },
-    { href: "/reader", label: "Reader" },
-    { href: "/ai-assistant", label: "AI Assistant" },
-    { href: "/quiz", label: "Quiz" },
-    { href: "/settings", label: "Settings" },
+    { href: "/", label: "Dashboard", icon: Home },
+    { href: "/library", label: "Library", icon: Library },
+    { href: "/reader", label: "Reader", icon: BookOpen },
+    { href: "/ai-assistant", label: "AI Assistant", icon: MessageSquare },
+    { href: "/quiz", label: "Quiz", icon: ClipboardList },
+    { href: "/settings", label: "Settings", icon: SettingsIcon },
   ];
 
-  const NavigationLinks = () => (
-    <>
-      {navItems.map((item) => (
-        <Link
-          key={item.href}
-          to={item.href}
-          className={`px-4 py-2 rounded-lg text-base font-medium transition-colors ${
-            location.pathname === item.href
-              ? "bg-primary text-primary-foreground"
-              : "hover:bg-muted"
-          }`}
-        >
-          {item.label}
-        </Link>
-      ))}
-    </>
-  );
-
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
+    <div className="min-h-screen bg-background pb-20">
+      {/* Top Header - Logo and Controls */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-6">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                ZEHNOVA
-              </div>
-            </Link>
-            
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-2">
-              <NavigationLinks />
-            </nav>
-          </div>
+          <Link to="/" className="flex items-center gap-2">
+            <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              ZEHNOVA
+            </div>
+          </Link>
 
           <div className="flex items-center gap-2">
             {/* Voice Control Indicator */}
@@ -93,20 +68,6 @@ const Layout = ({ children }: LayoutProps) => {
             >
               {isDark ? <Sun /> : <Moon />}
             </Button>
-
-            {/* Mobile Menu */}
-            <Sheet>
-              <SheetTrigger asChild className="md:hidden">
-                <Button variant="outline" size="icon" className="btn-accessible">
-                  <Menu />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-64">
-                <nav className="flex flex-col gap-4 mt-8">
-                  <NavigationLinks />
-                </nav>
-              </SheetContent>
-            </Sheet>
           </div>
         </div>
       </header>
@@ -116,9 +77,35 @@ const Layout = ({ children }: LayoutProps) => {
         {children}
       </main>
 
+      {/* Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-around py-2">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = location.pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-colors min-w-[60px] ${
+                    isActive
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Icon className="h-5 w-5" />
+                  <span className="text-xs font-medium">{item.label}</span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+
       {/* Voice Command Indicator */}
       {voiceActive && (
-        <div className="fixed bottom-4 right-4 glass-effect p-4 rounded-lg shadow-lg z-50">
+        <div className="fixed bottom-24 right-4 glass-effect p-4 rounded-lg shadow-lg z-50">
           <div className="flex items-center gap-2">
             <Mic className="w-5 h-5 text-primary animate-pulse" />
             <span className="text-sm font-medium">Listening...</span>
