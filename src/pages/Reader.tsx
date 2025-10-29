@@ -33,7 +33,7 @@ const Reader = () => {
   const navigate = useNavigate();
   const [isPlaying, setIsPlaying] = useState(false);
   const [fontSize, setFontSize] = useState(18);
-  const [lineSpacing, setLineSpacing] = useState(1.75);
+  const [wordSpacing, setWordSpacing] = useState(0.25);
   const [readingProgress, setReadingProgress] = useState(35);
   const [volume, setVolume] = useState([70]);
   const [gestureMode, setGestureMode] = useState(false);
@@ -156,23 +156,23 @@ He didn't say any more, but we've always been unusually communicative in a reser
               </Button>
             </div>
 
-            {/* Line Spacing */}
+            {/* Word Spacing */}
             <div className="flex items-center gap-2">
               <Eye className="h-5 w-5 text-muted-foreground" />
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => setLineSpacing(Math.max(1.25, lineSpacing - 0.25))}
-                aria-label="Decrease line spacing"
+                onClick={() => setWordSpacing(Math.max(0, wordSpacing - 0.1))}
+                aria-label="Decrease word spacing"
               >
                 <Minus className="h-4 w-4" />
               </Button>
-              <span className="text-sm font-medium w-12 text-center">{lineSpacing.toFixed(2)}</span>
+              <span className="text-sm font-medium w-16 text-center">{wordSpacing.toFixed(2)}em</span>
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => setLineSpacing(Math.min(2.5, lineSpacing + 0.25))}
-                aria-label="Increase line spacing"
+                onClick={() => setWordSpacing(Math.min(1, wordSpacing + 0.1))}
+                aria-label="Increase word spacing"
               >
                 <Plus className="h-4 w-4" />
               </Button>
@@ -241,7 +241,7 @@ He didn't say any more, but we've always been unusually communicative in a reser
               className="prose prose-lg dark:prose-invert max-w-none"
               style={{ 
                 fontSize: `${fontSize}px`,
-                lineHeight: lineSpacing,
+                wordSpacing: `${wordSpacing}em`,
                 fontFamily: 'ui-sans-serif, system-ui, -apple-system, sans-serif'
               }}
             >

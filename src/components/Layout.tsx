@@ -1,4 +1,4 @@
-import { Mic, Moon, Sun, Menu, Home, Library, BookOpen, MessageSquare, ClipboardList, Settings as SettingsIcon } from "lucide-react";
+import { Mic, Moon, Sun, Menu, Home, Library, BookOpen, MessageSquare, ClipboardList, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -32,7 +32,7 @@ const Layout = ({ children }: LayoutProps) => {
     { href: "/reader", label: "Reader", icon: BookOpen },
     { href: "/ai-assistant", label: "AI Assistant", icon: MessageSquare },
     { href: "/quiz", label: "Quiz", icon: ClipboardList },
-    { href: "/settings", label: "Settings", icon: SettingsIcon },
+    { href: "/profile", label: "Profile", icon: User },
   ];
 
   return (

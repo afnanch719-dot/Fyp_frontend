@@ -10,7 +10,7 @@ import Library from "./pages/Library";
 import Reader from "./pages/Reader";
 import AIAssistant from "./pages/AIAssistant";
 import Quiz from "./pages/Quiz";
-import Settings from "./pages/Settings";
+import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
 
 const queryClient = new QueryClient();
@@ -28,7 +28,7 @@ const App = () => (
           <Route path="/reader" element={<Layout><Reader /></Layout>} />
           <Route path="/ai-assistant" element={<Layout><AIAssistant /></Layout>} />
           <Route path="/quiz" element={<Layout><Quiz /></Layout>} />
-          <Route path="/settings" element={<Layout><Settings /></Layout>} />
+          <Route path="/profile" element={<Layout><Profile /></Layout>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -12,6 +12,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
 
 const Library = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -19,6 +27,12 @@ const Library = () => {
   const [collections, setCollections] = useState<string[]>(["All", "Currently Reading", "Favorites"]);
   const [showAddCollection, setShowAddCollection] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState("");
+  const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
+  const [bookFile, setBookFile] = useState<File | null>(null);
+  const [bookTitle, setBookTitle] = useState("");
+  const [bookAuthor, setBookAuthor] = useState("");
+  const [bookGenre, setBookGenre] = useState("");
+  const [bookRating, setBookRating] = useState("");
 
   const books = [
     {
@@ -125,10 +139,109 @@ const Library = () => {
             <FolderPlus className="mr-2 h-5 w-5" />
             Add Collection
           </Button>
-          <Button className="btn-accessible">
-            <Upload className="mr-2 h-5 w-5" />
-            Upload Book
-          </Button>
+          <Dialog open={uploadDialogOpen} onOpenChange={setUploadDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="btn-accessible">
+                <Upload className="mr-2 h-5 w-5" />
+                Upload Book
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[600px]">
+              <DialogHeader>
+                <DialogTitle className="text-2xl">Add New Book</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-6 py-4">
+                <div className="space-y-2">
+                  <Label htmlFor="book-file" className="text-base">
+                    Book File <span className="text-destructive">*</span>
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="book-file"
+                      type="file"
+                      accept=".pdf,.epub,.doc,.docx"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        setBookFile(file || null);
+                        if (file && !bookTitle) {
+                          setBookTitle(file.name.replace(/\.[^/.]+$/, ""));
+                        }
+                      }}
+                      className="cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+                    />
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Accepted formats: PDF, EPUB, DOC, DOCX
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="book-title" className="text-base">
+                    Title <span className="text-destructive">*</span>
+                  </Label>
+                  <Input
+                    id="book-title"
+                    placeholder="Auto-filled from file name"
+                    value={bookTitle}
+                    onChange={(e) => setBookTitle(e.target.value)}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="book-author" className="text-base">
+                    Author
+                  </Label>
+                  <Input
+                    id="book-author"
+                    placeholder="Enter author name"
+                    value={bookAuthor}
+                    onChange={(e) => setBookAuthor(e.target.value)}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="book-genre" className="text-base">
+                    Genre
+                  </Label>
+                  <Input
+                    id="book-genre"
+                    placeholder="Enter genre"
+                    value={bookGenre}
+                    onChange={(e) => setBookGenre(e.target.value)}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="book-rating" className="text-base">
+                    Rating (0-5)
+                  </Label>
+                  <Input
+                    id="book-rating"
+                    type="number"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    placeholder="Enter rating"
+                    value={bookRating}
+                    onChange={(e) => setBookRating(e.target.value)}
+                  />
+                </div>
+
+                <Button 
+                  className="w-full btn-accessible" 
+                  size="lg"
+                  onClick={() => {
+                    // TODO: Handle book upload
+                    console.log("Upload book:", { bookFile, bookTitle, bookAuthor, bookGenre, bookRating });
+                    setUploadDialogOpen(false);
+                  }}
+                >
+                  <Upload className="mr-2 h-5 w-5" />
+                  Upload Book
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 
