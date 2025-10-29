@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Globe,
   Volume2,
   Eye,
   Accessibility,
@@ -19,7 +18,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-const Settings = () => {
+const Profile = () => {
   const [showProfileEdit, setShowProfileEdit] = useState(false);
 
   return (
@@ -217,76 +216,6 @@ const Settings = () => {
             </div>
           </div>
           
-          <Separator />
-          
-          <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <Label htmlFor="sentiment-adaptive">Sentiment-Adaptive Narration</Label>
-              <p className="text-sm text-muted-foreground">
-                Adjust narration based on your mood and engagement
-              </p>
-            </div>
-            <Switch id="sentiment-adaptive" defaultChecked />
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Language Settings */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Globe className="h-5 w-5" />
-            Language & Translation
-          </CardTitle>
-          <CardDescription>Configure language preferences</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="app-language">App Language</Label>
-            <Select defaultValue="en">
-              <SelectTrigger id="app-language">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="en">English</SelectItem>
-                <SelectItem value="es">Español</SelectItem>
-                <SelectItem value="fr">Français</SelectItem>
-                <SelectItem value="de">Deutsch</SelectItem>
-                <SelectItem value="hi">हिन्दी</SelectItem>
-                <SelectItem value="ar">العربية</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          
-          <Separator />
-          
-          <div className="space-y-2">
-            <Label htmlFor="reading-language">Default Reading Language</Label>
-            <Select defaultValue="en">
-              <SelectTrigger id="reading-language">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="en">English</SelectItem>
-                <SelectItem value="es">Spanish</SelectItem>
-                <SelectItem value="fr">French</SelectItem>
-                <SelectItem value="de">German</SelectItem>
-                <SelectItem value="hi">Hindi</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          
-          <Separator />
-          
-          <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <Label htmlFor="auto-translate">Auto-Translate Unknown Words</Label>
-              <p className="text-sm text-muted-foreground">
-                Automatically translate difficult terms
-              </p>
-            </div>
-            <Switch id="auto-translate" defaultChecked />
-          </div>
         </CardContent>
       </Card>
 
@@ -384,4 +313,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default Profile;
