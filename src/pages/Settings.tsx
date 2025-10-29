@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Globe,
   Volume2,
@@ -7,6 +8,7 @@ import {
   Shield,
   User,
   Smartphone,
+  Edit,
 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -18,18 +20,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const Settings = () => {
+  const [showProfileEdit, setShowProfileEdit] = useState(false);
+
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-4xl font-bold">Settings</h1>
-        <p className="text-muted-foreground mt-1">
-          Customize your reading experience and preferences
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-4xl font-bold">Settings</h1>
+          <p className="text-muted-foreground mt-1">
+            Customize your reading experience and preferences
+          </p>
+        </div>
+        <Button 
+          variant="outline"
+          className="btn-accessible"
+          onClick={() => setShowProfileEdit(!showProfileEdit)}
+        >
+          <Edit className="mr-2 h-5 w-5" />
+          Edit Profile
+        </Button>
       </div>
 
       {/* Profile Settings */}
-      <Card>
+      {showProfileEdit && (
+        <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <User className="h-5 w-5" />
@@ -49,6 +64,7 @@ const Settings = () => {
           <Button className="btn-accessible">Save Changes</Button>
         </CardContent>
       </Card>
+      )}
 
       {/* Accessibility Settings */}
       <Card>

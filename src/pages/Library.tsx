@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Filter, Grid, List, Upload, Plus } from "lucide-react";
+import { Search, Filter, Grid, List, Upload, Plus, FolderPlus, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,6 +16,9 @@ import {
 const Library = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [searchQuery, setSearchQuery] = useState("");
+  const [collections, setCollections] = useState<string[]>(["All", "Currently Reading", "Favorites"]);
+  const [showAddCollection, setShowAddCollection] = useState(false);
+  const [newCollectionName, setNewCollectionName] = useState("");
 
   const books = [
     {
@@ -86,12 +89,24 @@ const Library = () => {
     },
   ];
 
-  const categories = ["All", "Classic Literature", "Science Fiction", "Romance", "Fantasy"];
-
   const filteredBooks = books.filter((book) =>
     book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     book.author.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleAddCollection = () => {
+    if (newCollectionName.trim() && !collections.includes(newCollectionName.trim())) {
+      setCollections([...collections, newCollectionName.trim()]);
+      setNewCollectionName("");
+      setShowAddCollection(false);
+    }
+  };
+
+  const handleRemoveCollection = (collectionName: string) => {
+    if (collectionName !== "All") {
+      setCollections(collections.filter(c => c !== collectionName));
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -102,13 +117,17 @@ const Library = () => {
           <p className="text-muted-foreground mt-1">Manage and organize your book collection</p>
         </div>
         <div className="flex gap-2">
+          <Button 
+            variant="outline" 
+            className="btn-accessible"
+            onClick={() => setShowAddCollection(!showAddCollection)}
+          >
+            <FolderPlus className="mr-2 h-5 w-5" />
+            Add Collection
+          </Button>
           <Button className="btn-accessible">
             <Upload className="mr-2 h-5 w-5" />
             Upload Book
-          </Button>
-          <Button variant="outline" className="btn-accessible">
-            <Plus className="mr-2 h-5 w-5" />
-            Add New
           </Button>
         </div>
       </div>
@@ -163,26 +182,64 @@ const Library = () => {
         </CardContent>
       </Card>
 
-      {/* Categories */}
+      {/* Add Collection Input */}
+      {showAddCollection && (
+        <Card className="border-primary">
+          <CardContent className="p-4">
+            <div className="flex gap-2">
+              <Input
+                placeholder="Enter collection name..."
+                value={newCollectionName}
+                onChange={(e) => setNewCollectionName(e.target.value)}
+                onKeyPress={(e) => e.key === "Enter" && handleAddCollection()}
+                className="flex-1"
+                aria-label="New collection name"
+              />
+              <Button onClick={handleAddCollection} disabled={!newCollectionName.trim()}>
+                Add
+              </Button>
+              <Button variant="outline" onClick={() => setShowAddCollection(false)}>
+                Cancel
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Collections */}
       <Tabs defaultValue="All" className="w-full">
-        <TabsList className="grid w-full grid-cols-5 h-auto">
-          {categories.map((category) => (
-            <TabsTrigger
-              key={category}
-              value={category}
-              className="text-sm md:text-base py-3"
-            >
-              {category}
-            </TabsTrigger>
+        <TabsList className="flex flex-wrap w-full h-auto gap-2 bg-transparent p-0">
+          {collections.map((collection) => (
+            <div key={collection} className="relative group">
+              <TabsTrigger
+                value={collection}
+                className="text-sm md:text-base py-3 px-4"
+              >
+                {collection}
+              </TabsTrigger>
+              {collection !== "All" && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute -top-2 -right-2 h-5 w-5 opacity-0 group-hover:opacity-100 transition-opacity bg-destructive text-destructive-foreground rounded-full"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleRemoveCollection(collection);
+                  }}
+                >
+                  <X className="h-3 w-3" />
+                </Button>
+              )}
+            </div>
           ))}
         </TabsList>
-        {categories.map((category) => (
-          <TabsContent key={category} value={category} className="mt-6">
+        {collections.map((collection) => (
+          <TabsContent key={collection} value={collection} className="mt-6">
             {/* Books Grid/List */}
             {viewMode === "grid" ? (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {filteredBooks
-                  .filter((book) => category === "All" || book.category === category)
+                  .filter((book) => collection === "All" || book.category === collection)
                   .map((book) => (
                     <Card key={book.id} className="card-hover cursor-pointer group">
                       <div className={`h-48 bg-gradient-to-br ${book.coverColor} rounded-t-lg relative overflow-hidden`}>
@@ -223,7 +280,7 @@ const Library = () => {
             ) : (
               <div className="space-y-4">
                 {filteredBooks
-                  .filter((book) => category === "All" || book.category === category)
+                  .filter((book) => collection === "All" || book.category === collection)
                   .map((book) => (
                     <Card key={book.id} className="card-hover cursor-pointer">
                       <CardContent className="p-4">

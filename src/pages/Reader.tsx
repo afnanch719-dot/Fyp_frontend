@@ -33,6 +33,7 @@ const Reader = () => {
   const navigate = useNavigate();
   const [isPlaying, setIsPlaying] = useState(false);
   const [fontSize, setFontSize] = useState(18);
+  const [lineSpacing, setLineSpacing] = useState(1.75);
   const [readingProgress, setReadingProgress] = useState(35);
   const [volume, setVolume] = useState([70]);
   const [gestureMode, setGestureMode] = useState(false);
@@ -135,6 +136,7 @@ He didn't say any more, but we've always been unusually communicative in a reser
 
             {/* Font Size */}
             <div className="flex items-center gap-2">
+              <Type className="h-5 w-5 text-muted-foreground" />
               <Button
                 variant="outline"
                 size="icon"
@@ -149,6 +151,28 @@ He didn't say any more, but we've always been unusually communicative in a reser
                 size="icon"
                 onClick={() => setFontSize(Math.min(32, fontSize + 2))}
                 aria-label="Increase font size"
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+
+            {/* Line Spacing */}
+            <div className="flex items-center gap-2">
+              <Eye className="h-5 w-5 text-muted-foreground" />
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setLineSpacing(Math.max(1.25, lineSpacing - 0.25))}
+                aria-label="Decrease line spacing"
+              >
+                <Minus className="h-4 w-4" />
+              </Button>
+              <span className="text-sm font-medium w-12 text-center">{lineSpacing.toFixed(2)}</span>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setLineSpacing(Math.min(2.5, lineSpacing + 0.25))}
+                aria-label="Increase line spacing"
               >
                 <Plus className="h-4 w-4" />
               </Button>
@@ -214,8 +238,12 @@ He didn't say any more, but we've always been unusually communicative in a reser
 
             {/* Text Content */}
             <div
-              className="prose prose-lg dark:prose-invert max-w-none leading-relaxed"
-              style={{ fontSize: `${fontSize}px` }}
+              className="prose prose-lg dark:prose-invert max-w-none"
+              style={{ 
+                fontSize: `${fontSize}px`,
+                lineHeight: lineSpacing,
+                fontFamily: 'ui-sans-serif, system-ui, -apple-system, sans-serif'
+              }}
             >
               {bookContent.text.split('\n\n').map((paragraph, index) => (
                 <p key={index} className="mb-6">

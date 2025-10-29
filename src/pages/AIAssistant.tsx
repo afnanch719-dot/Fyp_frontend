@@ -32,29 +32,6 @@ const AIAssistant = () => {
     }
   }, [messages]);
 
-  const quickActions = [
-    {
-      icon: BookOpen,
-      label: "Summarize Chapter",
-      prompt: "Can you summarize the current chapter?",
-    },
-    {
-      icon: Info,
-      label: "Explain Term",
-      prompt: "What does [term] mean in this context?",
-    },
-    {
-      icon: Users,
-      label: "Character Info",
-      prompt: "Tell me about the main characters",
-    },
-    {
-      icon: Clock,
-      label: "Timeline",
-      prompt: "What's the timeline of events so far?",
-    },
-  ];
-
   const handleSend = () => {
     if (!input.trim()) return;
 
@@ -82,10 +59,6 @@ const AIAssistant = () => {
     }, 1500);
   };
 
-  const handleQuickAction = (prompt: string) => {
-    setInput(prompt);
-  };
-
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       {/* Header */}
@@ -101,22 +74,6 @@ const AIAssistant = () => {
             </p>
           </div>
         </div>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="grid gap-3 md:grid-cols-4">
-        {quickActions.map((action) => (
-          <Card
-            key={action.label}
-            className="cursor-pointer hover:bg-muted/50 transition-colors"
-            onClick={() => handleQuickAction(action.prompt)}
-          >
-            <CardContent className="p-4 flex items-center gap-3">
-              <action.icon className="h-5 w-5 text-primary flex-shrink-0" />
-              <span className="text-sm font-medium">{action.label}</span>
-            </CardContent>
-          </Card>
-        ))}
       </div>
 
       {/* Chat Interface */}
