@@ -63,9 +63,9 @@ const AIAssistant = () => {
     <div className="max-w-5xl mx-auto space-y-6">
       {/* Header */}
       <div className="space-y-2">
-        <div className="flex items-center gap-3">
-          <div className="p-3 rounded-lg bg-primary/10">
-            <Sparkles className="h-6 w-6 text-primary" />
+        <div className="flex items-center gap-4">
+          <div className="p-4 rounded-xl bg-primary/10 border-2 border-border/50">
+            <Sparkles className="h-8 w-8 text-primary" strokeWidth={2.5} />
           </div>
           <div>
             <h1 className="text-3xl font-bold">AI Reading Assistant</h1>
@@ -142,11 +142,11 @@ const AIAssistant = () => {
               />
               <Button
                 onClick={handleSend}
-                className="btn-accessible"
+                className="btn-accessible border-2"
                 size="lg"
                 disabled={!input.trim()}
               >
-                <Send className="h-5 w-5" />
+                <Send className="h-6 w-6" strokeWidth={2.5} />
               </Button>
             </div>
             <p className="text-xs text-muted-foreground mt-2">

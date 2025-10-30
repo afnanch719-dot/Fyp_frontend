@@ -66,8 +66,9 @@ He didn't say any more, but we've always been unusually communicative in a reser
             onClick={() => navigate("/ai-assistant")}
             aria-label="AI Assistant"
             title="Ask AI Assistant"
+            className="h-12 w-12 border-2"
           >
-            <MessageSquare className="h-5 w-5" />
+            <MessageSquare className="h-6 w-6" strokeWidth={2.5} />
           </Button>
           <Button 
             variant="outline" 
@@ -75,11 +76,12 @@ He didn't say any more, but we've always been unusually communicative in a reser
             onClick={() => navigate("/quiz")}
             aria-label="Take Quiz"
             title="Take Quiz"
+            className="h-12 w-12 border-2"
           >
-            <ClipboardList className="h-5 w-5" />
+            <ClipboardList className="h-6 w-6" strokeWidth={2.5} />
           </Button>
-          <Button variant="outline" className="btn-accessible">
-            <Bookmark className="mr-2 h-5 w-5" />
+          <Button variant="outline" className="btn-accessible border-2">
+            <Bookmark className="mr-2 h-7 w-7" strokeWidth={2.5} />
             Bookmark
           </Button>
         </div>
@@ -93,26 +95,26 @@ He didn't say any more, but we've always been unusually communicative in a reser
             <Button
               variant="outline"
               size="icon"
-              className="h-12 w-12"
+              className="h-14 w-14 border-2"
               aria-label="Previous chapter"
             >
-              <SkipBack />
+              <SkipBack className="h-7 w-7" strokeWidth={2.5} />
             </Button>
             <Button
               size="icon"
-              className="h-16 w-16"
+              className="h-20 w-20 border-2"
               onClick={() => setIsPlaying(!isPlaying)}
               aria-label={isPlaying ? "Pause" : "Play"}
             >
-              {isPlaying ? <Pause className="h-8 w-8" /> : <Play className="h-8 w-8" />}
+              {isPlaying ? <Pause className="h-10 w-10" strokeWidth={2.5} /> : <Play className="h-10 w-10" strokeWidth={2.5} />}
             </Button>
             <Button
               variant="outline"
               size="icon"
-              className="h-12 w-12"
+              className="h-14 w-14 border-2"
               aria-label="Next chapter"
             >
-              <SkipForward />
+              <SkipForward className="h-7 w-7" strokeWidth={2.5} />
             </Button>
           </div>
 
@@ -122,7 +124,7 @@ He didn't say any more, but we've always been unusually communicative in a reser
           <div className="flex flex-wrap items-center justify-between gap-4">
             {/* Volume */}
             <div className="flex items-center gap-3 flex-1 min-w-[200px]">
-              <Volume2 className="h-5 w-5 text-muted-foreground" />
+              <Volume2 className="h-6 w-6 text-muted-foreground" strokeWidth={2.5} />
               <Slider
                 value={volume}
                 onValueChange={setVolume}
@@ -136,14 +138,15 @@ He didn't say any more, but we've always been unusually communicative in a reser
 
             {/* Font Size */}
             <div className="flex items-center gap-2">
-              <Type className="h-5 w-5 text-muted-foreground" />
+              <Type className="h-6 w-6 text-muted-foreground" strokeWidth={2.5} />
               <Button
                 variant="outline"
                 size="icon"
                 onClick={() => setFontSize(Math.max(12, fontSize - 2))}
                 aria-label="Decrease font size"
+                className="border-2"
               >
-                <Minus className="h-4 w-4" />
+                <Minus className="h-5 w-5" strokeWidth={2.5} />
               </Button>
               <span className="text-sm font-medium w-12 text-center">{fontSize}px</span>
               <Button
@@ -151,21 +154,23 @@ He didn't say any more, but we've always been unusually communicative in a reser
                 size="icon"
                 onClick={() => setFontSize(Math.min(32, fontSize + 2))}
                 aria-label="Increase font size"
+                className="border-2"
               >
-                <Plus className="h-4 w-4" />
+                <Plus className="h-5 w-5" strokeWidth={2.5} />
               </Button>
             </div>
 
             {/* Word Spacing */}
             <div className="flex items-center gap-2">
-              <Eye className="h-5 w-5 text-muted-foreground" />
+              <Eye className="h-6 w-6 text-muted-foreground" strokeWidth={2.5} />
               <Button
                 variant="outline"
                 size="icon"
                 onClick={() => setWordSpacing(Math.max(0, wordSpacing - 0.1))}
                 aria-label="Decrease word spacing"
+                className="border-2"
               >
-                <Minus className="h-4 w-4" />
+                <Minus className="h-5 w-5" strokeWidth={2.5} />
               </Button>
               <span className="text-sm font-medium w-16 text-center">{wordSpacing.toFixed(2)}em</span>
               <Button
@@ -173,8 +178,9 @@ He didn't say any more, but we've always been unusually communicative in a reser
                 size="icon"
                 onClick={() => setWordSpacing(Math.min(1, wordSpacing + 0.1))}
                 aria-label="Increase word spacing"
+                className="border-2"
               >
-                <Plus className="h-4 w-4" />
+                <Plus className="h-5 w-5" strokeWidth={2.5} />
               </Button>
             </div>
 
@@ -182,8 +188,8 @@ He didn't say any more, but we've always been unusually communicative in a reser
             <div className="flex gap-2">
               <Popover>
                 <PopoverTrigger asChild>
-                  <Button variant="outline" size="icon" aria-label="Reading settings">
-                    <Settings />
+                  <Button variant="outline" size="icon" aria-label="Reading settings" className="h-12 w-12 border-2">
+                    <Settings className="h-6 w-6" strokeWidth={2.5} />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-80">
@@ -212,12 +218,13 @@ He didn't say any more, but we've always been unusually communicative in a reser
                 size="icon"
                 onClick={() => setGestureMode(!gestureMode)}
                 aria-label="Toggle gesture control"
+                className="h-12 w-12 border-2"
               >
-                <Hand />
+                <Hand className="h-6 w-6" strokeWidth={2.5} />
               </Button>
 
-              <Button variant="outline" size="icon" aria-label="AI Assistant">
-                <MessageSquare />
+              <Button variant="outline" size="icon" aria-label="AI Assistant" className="h-12 w-12 border-2">
+                <MessageSquare className="h-6 w-6" strokeWidth={2.5} />
               </Button>
             </div>
           </div>
