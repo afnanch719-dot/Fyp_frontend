@@ -21,13 +21,6 @@ const Dashboard = () => {
       color: "text-accent",
     },
     {
-      icon: Brain,
-      title: "Words Learned",
-      value: "1,247",
-      change: "+89 this week",
-      color: "text-success",
-    },
-    {
       icon: Trophy,
       title: "Quizzes Completed",
       value: "18",
@@ -89,7 +82,7 @@ const Dashboard = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {stats.map((stat) => (
           <Card key={stat.title} className="card-hover">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -158,7 +151,6 @@ const Dashboard = () => {
                 </div>
                 <div className="flex-1 space-y-1">
                   <h4 className="font-semibold">{feature.title}</h4>
-                  <p className="text-sm text-muted-foreground">{feature.description}</p>
                   <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-success/10 text-success">
                     {feature.status}
                   </span>
