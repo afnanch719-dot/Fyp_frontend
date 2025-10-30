@@ -86,9 +86,9 @@ const Quiz = () => {
       <div className="max-w-3xl mx-auto space-y-6">
         <Card className="text-center">
           <CardHeader>
-          <div className="flex justify-center mb-4">
-              <div className="p-6 rounded-full bg-primary/10 border-2 border-border/50">
-                <Trophy className="h-20 w-20 text-primary" strokeWidth={2.5} />
+            <div className="flex justify-center mb-4">
+              <div className="p-4 rounded-full bg-primary/10">
+                <Trophy className="h-16 w-16 text-primary" />
               </div>
             </div>
             <CardTitle className="text-3xl">Quiz Complete!</CardTitle>
@@ -108,16 +108,16 @@ const Quiz = () => {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
-              <Card className="glass-effect border-2">
+              <Card className="glass-effect">
                 <CardContent className="p-6 text-center">
-                  <CheckCircle2 className="h-10 w-10 text-success mx-auto mb-2" strokeWidth={2.5} />
+                  <CheckCircle2 className="h-8 w-8 text-success mx-auto mb-2" />
                   <div className="text-2xl font-bold">{score}</div>
                   <div className="text-sm text-muted-foreground">Correct</div>
                 </CardContent>
               </Card>
-              <Card className="glass-effect border-2">
+              <Card className="glass-effect">
                 <CardContent className="p-6 text-center">
-                  <XCircle className="h-10 w-10 text-destructive mx-auto mb-2" strokeWidth={2.5} />
+                  <XCircle className="h-8 w-8 text-destructive mx-auto mb-2" />
                   <div className="text-2xl font-bold">{questions.length - score}</div>
                   <div className="text-sm text-muted-foreground">Incorrect</div>
                 </CardContent>
@@ -125,8 +125,8 @@ const Quiz = () => {
             </div>
 
             <div className="flex gap-4">
-              <Button className="flex-1 btn-accessible border-2" size="lg" onClick={handleRestart}>
-                <RotateCcw className="mr-2 h-7 w-7" strokeWidth={2.5} />
+              <Button className="flex-1 btn-accessible" size="lg" onClick={handleRestart}>
+                <RotateCcw className="mr-2 h-5 w-5" />
                 Try Again
               </Button>
               <Button
@@ -152,8 +152,8 @@ const Quiz = () => {
           <h1 className="text-3xl font-bold">Interactive Quiz</h1>
           <p className="text-muted-foreground">Test your understanding of the book</p>
         </div>
-        <Badge variant="secondary" className="text-lg py-2 px-4 border-2">
-          <Brain className="mr-2 h-7 w-7" strokeWidth={2.5} />
+        <Badge variant="secondary" className="text-lg py-2 px-4">
+          <Brain className="mr-2 h-5 w-5" />
           Score: {score}
         </Badge>
       </div>
@@ -215,10 +215,10 @@ const Quiz = () => {
                     {option}
                   </Label>
                   {showResult && index === questions[currentQuestion].correctAnswer && (
-                    <CheckCircle2 className="h-7 w-7 text-success" strokeWidth={2.5} />
+                    <CheckCircle2 className="h-6 w-6 text-success" />
                   )}
                   {showResult && selectedAnswer === index && index !== questions[currentQuestion].correctAnswer && (
-                    <XCircle className="h-7 w-7 text-destructive" strokeWidth={2.5} />
+                    <XCircle className="h-6 w-6 text-destructive" />
                   )}
                 </div>
               ))}
@@ -226,10 +226,10 @@ const Quiz = () => {
           </RadioGroup>
 
           {showResult && (
-            <Card className="glass-effect border-primary/50 border-2">
+            <Card className="glass-effect border-primary/50">
               <CardContent className="p-4">
                 <div className="flex gap-3">
-                  <Sparkles className="h-7 w-7 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <Sparkles className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-semibold mb-1">Explanation</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">

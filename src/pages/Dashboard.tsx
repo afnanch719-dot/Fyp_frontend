@@ -1,9 +1,8 @@
-import { BookOpen, Brain, Trophy, Clock, TrendingUp, Mic, Hand, BarChart3 } from "lucide-react";
+import { BookOpen, Brain, Trophy, Clock, TrendingUp, Mic, Hand } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
 const Dashboard = () => {
   const stats = [
@@ -11,33 +10,23 @@ const Dashboard = () => {
       icon: BookOpen,
       title: "Books Read",
       value: "24",
+      change: "+3 this month",
       color: "text-primary",
-      bgColor: "bg-primary/10",
     },
     {
       icon: Clock,
       title: "Reading Time",
       value: "48h 32m",
+      change: "+5h this week",
       color: "text-accent",
-      bgColor: "bg-accent/10",
     },
     {
       icon: Trophy,
       title: "Quizzes Completed",
       value: "18",
-      color: "text-success",
-      bgColor: "bg-success/10",
+      change: "92% accuracy",
+      color: "text-destructive",
     },
-  ];
-
-  const weeklyReadingData = [
-    { day: "Mon", hours: 2.5 },
-    { day: "Tue", hours: 3.2 },
-    { day: "Wed", hours: 1.8 },
-    { day: "Thu", hours: 4.1 },
-    { day: "Fri", hours: 2.9 },
-    { day: "Sat", hours: 5.3 },
-    { day: "Sun", hours: 4.7 },
   ];
 
   const recentBooks = [
@@ -93,82 +82,25 @@ const Dashboard = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {stats.map((stat) => (
-          <Card key={stat.title} className="card-hover border-2">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className={`p-4 rounded-xl ${stat.bgColor} border-2 border-border/50`}>
-                  <stat.icon className={`h-8 w-8 ${stat.color}`} strokeWidth={2.5} />
-                </div>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm font-semibold text-muted-foreground">{stat.title}</p>
-                <div className="text-4xl font-bold">{stat.value}</div>
-              </div>
+          <Card key={stat.title} className="card-hover">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+              <stat.icon className={`h-5 w-5 ${stat.color}`} />
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold">{stat.value}</div>
+              <p className="text-xs text-muted-foreground mt-1">{stat.change}</p>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      {/* Reading Activity Chart */}
-      <Card className="border-2">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="text-2xl flex items-center gap-3">
-                <div className="p-3 rounded-xl bg-primary/10 border-2 border-border/50">
-                  <BarChart3 className="h-7 w-7 text-primary" strokeWidth={2.5} />
-                </div>
-                Weekly Reading Activity
-              </CardTitle>
-              <CardDescription className="mt-2">Hours spent reading this week</CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={weeklyReadingData}>
-              <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-              <XAxis 
-                dataKey="day" 
-                className="text-sm"
-                tick={{ fill: 'hsl(var(--muted-foreground))' }}
-              />
-              <YAxis 
-                className="text-sm"
-                tick={{ fill: 'hsl(var(--muted-foreground))' }}
-                label={{ value: 'Hours', angle: -90, position: 'insideLeft' }}
-              />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: 'hsl(var(--card))',
-                  border: '2px solid hsl(var(--border))',
-                  borderRadius: '0.5rem',
-                  fontWeight: 600
-                }}
-                labelStyle={{ fontWeight: 'bold' }}
-              />
-              <Bar 
-                dataKey="hours" 
-                fill="hsl(var(--primary))" 
-                radius={[8, 8, 0, 0]}
-                maxBarSize={60}
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
-
       {/* Continue Reading */}
-      <Card className="border-2">
+      <Card>
         <CardHeader>
-          <CardTitle className="text-2xl flex items-center gap-3">
-            <div className="p-3 rounded-xl bg-primary/10 border-2 border-border/50">
-              <BookOpen className="h-7 w-7 text-primary" strokeWidth={2.5} />
-            </div>
-            Continue Reading
-          </CardTitle>
+          <CardTitle className="text-2xl">Continue Reading</CardTitle>
           <CardDescription>Pick up where you left off</CardDescription>
         </CardHeader>
         <CardContent>
@@ -202,14 +134,9 @@ const Dashboard = () => {
       </Card>
 
       {/* Accessibility Features */}
-      <Card className="border-2">
+      <Card>
         <CardHeader>
-          <CardTitle className="text-2xl flex items-center gap-3">
-            <div className="p-3 rounded-xl bg-primary/10 border-2 border-border/50">
-              <Brain className="h-7 w-7 text-primary" strokeWidth={2.5} />
-            </div>
-            Accessibility Features
-          </CardTitle>
+          <CardTitle className="text-2xl">Accessibility Features</CardTitle>
           <CardDescription>Your personalized reading experience</CardDescription>
         </CardHeader>
         <CardContent>
@@ -217,14 +144,14 @@ const Dashboard = () => {
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className="flex items-start gap-4 p-5 rounded-xl border-2 bg-card hover:bg-muted/50 transition-all hover:scale-[1.02]"
+                className="flex items-start gap-4 p-4 rounded-lg border bg-card hover:bg-muted/50 transition-colors"
               >
-                <div className="p-3 rounded-xl bg-primary/10 border-2 border-border/50">
-                  <feature.icon className="h-7 w-7 text-primary" strokeWidth={2.5} />
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <feature.icon className="h-6 w-6 text-primary" />
                 </div>
-                <div className="flex-1 space-y-2">
-                  <h4 className="font-bold text-lg">{feature.title}</h4>
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-success/10 text-success border border-success/20">
+                <div className="flex-1 space-y-1">
+                  <h4 className="font-semibold">{feature.title}</h4>
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-success/10 text-success">
                     {feature.status}
                   </span>
                 </div>
@@ -235,30 +162,26 @@ const Dashboard = () => {
       </Card>
 
       {/* Quick Actions */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         <Link to="/library">
-          <Card className="card-hover cursor-pointer border-2 group">
-            <CardHeader className="p-6">
-              <CardTitle className="flex items-center gap-4 text-xl">
-                <div className="p-3 rounded-xl bg-primary/10 border-2 border-border/50 group-hover:border-primary transition-colors">
-                  <BookOpen className="h-7 w-7 text-primary" strokeWidth={2.5} />
-                </div>
+          <Card className="card-hover cursor-pointer">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BookOpen className="h-5 w-5" />
                 Browse Library
               </CardTitle>
-              <CardDescription className="mt-2">Explore your collection of books</CardDescription>
+              <CardDescription>Explore your collection of books</CardDescription>
             </CardHeader>
           </Card>
         </Link>
         <Link to="/ai-assistant">
-          <Card className="card-hover cursor-pointer border-2 group">
-            <CardHeader className="p-6">
-              <CardTitle className="flex items-center gap-4 text-xl">
-                <div className="p-3 rounded-xl bg-primary/10 border-2 border-border/50 group-hover:border-primary transition-colors">
-                  <Brain className="h-7 w-7 text-primary" strokeWidth={2.5} />
-                </div>
+          <Card className="card-hover cursor-pointer">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Brain className="h-5 w-5" />
                 Ask AI Assistant
               </CardTitle>
-              <CardDescription className="mt-2">Get help with your reading</CardDescription>
+              <CardDescription>Get help with your reading</CardDescription>
             </CardHeader>
           </Card>
         </Link>

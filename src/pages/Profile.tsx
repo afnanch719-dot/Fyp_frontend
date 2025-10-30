@@ -33,10 +33,10 @@ const Profile = () => {
         </div>
         <Button 
           variant="outline"
-          className="btn-accessible border-2"
+          className="btn-accessible"
           onClick={() => setShowProfileEdit(!showProfileEdit)}
         >
-          <Edit className="mr-2 h-7 w-7" strokeWidth={2.5} />
+          <Edit className="mr-2 h-5 w-5" />
           Edit Profile
         </Button>
       </div>
@@ -45,10 +45,8 @@ const Profile = () => {
       {showProfileEdit && (
         <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10 border-2 border-border/50">
-              <User className="h-7 w-7 text-primary" strokeWidth={2.5} />
-            </div>
+          <CardTitle className="flex items-center gap-2">
+            <User className="h-5 w-5" />
             Profile Settings
           </CardTitle>
           <CardDescription>Manage your account information</CardDescription>
@@ -68,12 +66,10 @@ const Profile = () => {
       )}
 
       {/* Accessibility Settings */}
-      <Card className="border-2">
+      <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10 border-2 border-border/50">
-              <Accessibility className="h-7 w-7 text-primary" strokeWidth={2.5} />
-            </div>
+          <CardTitle className="flex items-center gap-2">
+            <Accessibility className="h-5 w-5" />
             Accessibility Features
           </CardTitle>
           <CardDescription>
@@ -130,12 +126,10 @@ const Profile = () => {
       </Card>
 
       {/* Reading Settings */}
-      <Card className="border-2">
+      <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10 border-2 border-border/50">
-              <Eye className="h-7 w-7 text-primary" strokeWidth={2.5} />
-            </div>
+          <CardTitle className="flex items-center gap-2">
+            <Eye className="h-5 w-5" />
             Reading Preferences
           </CardTitle>
           <CardDescription>Customize your reading experience</CardDescription>
@@ -187,12 +181,10 @@ const Profile = () => {
       </Card>
 
       {/* Audio Settings */}
-      <Card className="border-2">
+      <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10 border-2 border-border/50">
-              <Volume2 className="h-7 w-7 text-primary" strokeWidth={2.5} />
-            </div>
+          <CardTitle className="flex items-center gap-2">
+            <Volume2 className="h-5 w-5" />
             Audio & Voice Settings
           </CardTitle>
           <CardDescription>Configure text-to-speech and audio</CardDescription>
@@ -218,7 +210,7 @@ const Profile = () => {
           <div className="space-y-2">
             <Label>Speech Volume</Label>
             <div className="flex items-center gap-4">
-              <Volume2 className="h-6 w-6 text-muted-foreground" strokeWidth={2.5} />
+              <Volume2 className="h-4 w-4 text-muted-foreground" />
               <Slider defaultValue={[70]} max={100} step={1} className="flex-1" />
               <span className="text-sm font-medium w-12 text-right">70%</span>
             </div>
@@ -228,12 +220,10 @@ const Profile = () => {
       </Card>
 
       {/* Notifications */}
-      <Card className="border-2">
+      <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10 border-2 border-border/50">
-              <Bell className="h-7 w-7 text-primary" strokeWidth={2.5} />
-            </div>
+          <CardTitle className="flex items-center gap-2">
+            <Bell className="h-5 w-5" />
             Notifications
           </CardTitle>
           <CardDescription>Manage your notification preferences</CardDescription>
@@ -276,12 +266,10 @@ const Profile = () => {
       </Card>
 
       {/* Privacy & Security */}
-      <Card className="border-2">
+      <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10 border-2 border-border/50">
-              <Shield className="h-7 w-7 text-primary" strokeWidth={2.5} />
-            </div>
+          <CardTitle className="flex items-center gap-2">
+            <Shield className="h-5 w-5" />
             Privacy & Security
           </CardTitle>
           <CardDescription>Manage your privacy and data settings</CardDescription>

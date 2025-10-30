@@ -133,16 +133,16 @@ const Library = () => {
         <div className="flex gap-2">
           <Button 
             variant="outline" 
-            className="btn-accessible border-2"
+            className="btn-accessible"
             onClick={() => setShowAddCollection(!showAddCollection)}
           >
-            <FolderPlus className="mr-2 h-7 w-7" strokeWidth={2.5} />
+            <FolderPlus className="mr-2 h-5 w-5" />
             Add Collection
           </Button>
           <Dialog open={uploadDialogOpen} onOpenChange={setUploadDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="btn-accessible border-2">
-                <Upload className="mr-2 h-7 w-7" strokeWidth={2.5} />
+              <Button className="btn-accessible">
+                <Upload className="mr-2 h-5 w-5" />
                 Upload Book
               </Button>
             </DialogTrigger>
@@ -250,7 +250,7 @@ const Library = () => {
         <CardContent className="p-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-6 w-6 text-muted-foreground" strokeWidth={2.5} />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 placeholder="Search books by title or author..."
                 className="pl-10 h-12 text-base"
@@ -275,20 +275,20 @@ const Library = () => {
               <Button
                 variant={viewMode === "grid" ? "default" : "outline"}
                 size="icon"
-                className="h-12 w-12 border-2"
+                className="h-12 w-12"
                 onClick={() => setViewMode("grid")}
                 aria-label="Grid view"
               >
-                <Grid className="h-6 w-6" strokeWidth={2.5} />
+                <Grid />
               </Button>
               <Button
                 variant={viewMode === "list" ? "default" : "outline"}
                 size="icon"
-                className="h-12 w-12 border-2"
+                className="h-12 w-12"
                 onClick={() => setViewMode("list")}
                 aria-label="List view"
               >
-                <List className="h-6 w-6" strokeWidth={2.5} />
+                <List />
               </Button>
             </div>
           </div>
